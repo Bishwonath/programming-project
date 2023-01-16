@@ -39,7 +39,7 @@ def signin():
 ############-------------------
 frame1=Frame(root,width=350, height=300, bg="blue")
 frame1.place(x=60, y=40)
-image=(Image.open("task-mng.webp"))
+image=(Image.open("task.png"))
 resize_image=image.resize((310,330))
 imagess=ImageTk.PhotoImage(resize_image)
 lbl=Label(frame1, image=imagess, width=300, height=300)
