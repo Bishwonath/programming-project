@@ -7,7 +7,7 @@ import ast
 
 root=Tk()
 root.title('Sign Up')
-root.geometry('800x400+200+200')
+root.geometry('800x450+300+200')
 root.configure(bg="white")
 root.resizable(False, False)
 
