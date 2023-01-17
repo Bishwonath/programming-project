@@ -36,7 +36,7 @@ def signin():
         messagebox.showerror("Error","Invalid Username")
 
 
-############-------------------
+############--------------------
 frame1=Frame(root,width=350, height=300, bg="blue")
 frame1.place(x=60, y=40)
 image=(Image.open("task.png"))
@@ -51,7 +51,7 @@ frame.place(x=400, y=50)
 heading=Label(frame, text='Log In', fg="#917991", font=('Officina',23,'bold'))
 heading.place(x=130, y=1)
 
-############-------------------
+############--------------------
 def on_enter(e):
     user.delete(0, 'end')
 
