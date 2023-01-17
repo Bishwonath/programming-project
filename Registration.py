@@ -94,7 +94,7 @@ lname.bind('<FocusOut>', on_leave)
 
 Frame(frame, width=154, height=2, bg='black').place(x=180, y=107)
 
-############-------------------
+############--------------------
 def on_enter(e):
     user.delete(0, 'end')
 
@@ -111,7 +111,7 @@ user.bind('<FocusOut>', on_leave)
 
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=149)
 
-############-------------------
+############--------------------
 def on_enter(e):
     email.delete(0, 'end')
 
@@ -128,7 +128,7 @@ email.bind('<FocusOut>', on_leave)
 
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=191)
 
-############--------------------
+############---------------------
 def on_enter(e):
     code.delete(0, 'end')
 
@@ -145,7 +145,7 @@ code.bind('<FocusOut>', on_leave)
 
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=233)
 
-##------------------------------
+##-------------------------------
 def on_enter(e):
     confirm_code.delete(0, 'end')
 
@@ -162,12 +162,12 @@ confirm_code.bind('<FocusOut>', on_leave)
 
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=275)
 
-############--------------------
+############---------------------
 check_value=IntVar
 check_box=Checkbutton(text="I read and agree to Terms & Conditions?",fg='black',font=('Officina',7), variable=check_value)
 check_box.place(x=90, y=290)
 
-############--------------------
+############---------------------
 Button(frame, width=39, pady=7, text='Register', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=305)
 label=Label(frame, text="Already have an account?", fg='black', bg='white', font=('Officina',8))
 label.place(x=100, y=344)
