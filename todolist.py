@@ -115,8 +115,8 @@ if __name__ == "__main__":
   
     
     header_frame.pack(fill = "both")  
-    functions_frame.pack(side = "left", expand = True, fill = "both")  
-    listbox_frame.pack(side = "right", expand = True, fill = "both")  
+    functions_frame.pack(side = "bottom", expand = True, fill = "both")  
+    listbox_frame.pack(side = "top", expand = True, fill = "both")  
       
      
     header_label = ttk.Label(  
@@ -138,7 +138,7 @@ if __name__ == "__main__":
         foreground = "#000000"  
     )  
     
-    task_label.place(x = 30, y = 40)  
+    task_label.place(x = 240, y = 10)  
       
      
     task_field = ttk.Entry(  
@@ -149,7 +149,7 @@ if __name__ == "__main__":
         foreground = "#A52A2A"  
     )  
     
-    task_field.place(x = 30, y = 80)  
+    task_field.place(x = 390, y = 9)  
   
      
     add_button = ttk.Button(  
@@ -177,16 +177,16 @@ if __name__ == "__main__":
         command = close  
     )  
       
-    add_button.place(x = 30, y = 120)  
-    del_button.place(x = 30, y = 160)  
-    del_all_button.place(x = 30, y = 200)  
-    exit_button.place(x = 30, y = 240)  
+    add_button.place(x = 225, y = 50)  
+    del_button.place(x = 400, y = 50)  
+    del_all_button.place(x = 225, y = 90)  
+    exit_button.place(x = 400, y = 90)  
   
     
     task_listbox = tk.Listbox(  
         listbox_frame,  
-        width = 26,  
-        height = 13,  
+        width = 128,  
+        height = 8,  
         selectmode = 'SINGLE',  
         background = "#FFFFFF",  
         foreground = "#000000",  
