@@ -1,4 +1,5 @@
-import tkinter as tk   
+import tkinter as tk  
+from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3 as sql                 
@@ -60,8 +61,17 @@ def delete_all_tasks():
           
         the_cursor.execute('delete from tasks')  
           
-        list_update()  
-  
+        list_update() 
+            
+def cross_off_tasks():
+      task_listbox.itemconfig(
+            task_list.curselection(),
+            fg="464646")
+      
+ def uncross_tasks():
+    task_listbox.itemconfig(
+        task_listbox.curselection(),
+        fg="#464646")
   
 def clear_list():  
     
@@ -91,10 +101,12 @@ if __name__ == "__main__":
     guiWindow = tk.Tk()  
     
     guiWindow.title("To-Do List Manager")  
+     
+    guiWindow.iconitmap("to do list.ico)
       
     guiWindow.geometry("800x400+200+200")  
       
-    guiWindow.resizable(0, 0)  
+    guiWindow.resizable(0, 1)  
       
     guiWindow.configure(bg = "#917991")  
   
@@ -175,12 +187,25 @@ if __name__ == "__main__":
         text = "Exit",  
         width = 24,  
         command = close  
-    )  
-      
+    ) 
+    cross_button = ttk.Button(
+        functions_frame,
+        text = "Cross Off Task",
+        width = 24,
+        command = cross_off_tasks 
+    )
+    uncross_button = ttk.Button(
+        functions_frame,
+        text = "Uncross Task",
+        width = 24,
+        command = uncross_tasks
+    )    
     add_button.place(x = 225, y = 50)  
     del_button.place(x = 400, y = 50)  
     del_all_button.place(x = 225, y = 90)  
-    exit_button.place(x = 400, y = 90)  
+    exit_button.place(x = 400, y = 90) 
+    cross_button.place(x=225,y =125)
+    uncross_button.place(x=400, y=125)
   
     
     task_listbox = tk.Listbox(  
