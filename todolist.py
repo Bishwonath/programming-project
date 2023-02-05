@@ -65,8 +65,8 @@ def delete_all_tasks():
             
 def cross_off_tasks():
       task_listbox.itemconfig(
-            task_list.curselection(),
-            fg="464646")
+            task_listbox.curselection(),
+            fg="#dedede")
       
 def uncross_tasks():
     task_listbox.itemconfig(
