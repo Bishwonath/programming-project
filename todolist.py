@@ -68,7 +68,7 @@ def cross_off_tasks():
             task_list.curselection(),
             fg="464646")
       
- def uncross_tasks():
+def uncross_tasks():
     task_listbox.itemconfig(
         task_listbox.curselection(),
         fg="#464646")
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     
     guiWindow.title("To-Do List Manager")  
      
-    guiWindow.iconitmap("to do list.ico)
+    guiWindow.iconpitmap("to do list.ico")
       
     guiWindow.geometry("800x400+200+200")  
       
