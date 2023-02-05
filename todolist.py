@@ -102,7 +102,7 @@ if __name__ == "__main__":
     
     guiWindow.title("To-Do List Manager")  
      
-    guiWindow.iconpitmap("to do list.ico")
+    guiWindow.iconbitmap("to do list.ico")
       
     guiWindow.geometry("800x400+200+200")  
       
