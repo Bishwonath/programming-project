@@ -10,6 +10,7 @@ root.title('Login')
 root.geometry('800x400+200+200')
 root.configure(bg="white")
 root.resizable(False, False)
+root.iconbitmap("to do list.ico")
 
 ############-------------------
 def signin():
