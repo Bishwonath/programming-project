@@ -168,7 +168,11 @@ Button(frame, width=39, pady=7, text='Register', bg='#917991', fg='white', borde
 label=Label(frame, text="Already have an account?", fg='black', bg='white', font=('Officina',8))
 label.place(x=100, y=344)
 
-sign_up=Button(frame, width=6, text='Sign In', border=0, bg='white', cursor='hand2', fg='#917991')
+def signin():
+    root.destroy()
+    import Login
+
+sign_up=Button(frame, width=6, text='Sign In', border=0, bg='white', cursor='hand2', fg='#917991', command=signin)
 sign_up.place(x=231, y=344)
 
 root.bind('<Return>',lambda event:signin())
