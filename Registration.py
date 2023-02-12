@@ -3,7 +3,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image,ImageTk
-import ast
+import sqlite3 as sql
 
 root=Tk()
 root.title('Sign Up')
@@ -23,7 +23,7 @@ def signin():
         try:
             file=open('datasheet.txt','r+')
             d=file.read()
-            r=ast.literal_eval(d)
+            r=sql.literal_eval(d)
 
             dict2={username:password}
             r.update(dict2)
@@ -163,12 +163,8 @@ confirm_code.bind('<FocusOut>', on_leave)
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=275)
 
 ############---------------------
-check_value=IntVar
-check_box=Checkbutton(text="I read and agree to Terms & Conditions?",fg='black',font=('Officina',7), variable=check_value)
-check_box.place(x=90, y=290)
-
-############---------------------
 Button(frame, width=39, pady=7, text='Register', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=305)
+
 label=Label(frame, text="Already have an account?", fg='black', bg='white', font=('Officina',8))
 label.place(x=100, y=344)
 

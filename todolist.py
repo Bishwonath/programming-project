@@ -1,7 +1,7 @@
 import tkinter as tk   
 from tkinter import ttk
 from tkinter import messagebox
-import sqlite3 as sql                 
+import sqlite3 as sql             
 
 def add_task():  
       
