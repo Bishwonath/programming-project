@@ -10,7 +10,6 @@ root.title('Login')
 root.geometry('800x400+200+200')
 root.configure(bg="white")
 root.resizable(False, False)
-root.iconbitmap("to do list.ico")
 
 ############-------------------
 def signin():
@@ -35,6 +34,16 @@ def signin():
 
     elif username!="admin":
         messagebox.showerror("Error","Invalid Username")
+    
+def signup():       
+    root.destroy()
+    import Registration
+
+    
+
+    
+
+       
 
 
 ############-------------------
@@ -91,7 +100,7 @@ Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0
 label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
 label.place(x=100, y=270)
 
-sign_up=Button(frame, width=6, text='Sign Up', border=0, bg='white', cursor='hand2', fg='#917991')
+sign_up=Button(frame, width=6, text='Sign Up', border=0, bg='white', cursor='hand2', fg='#917991', command=signup)
 sign_up.place(x=220, y=270)
 
 root.bind('<Return>',lambda event:signin())
