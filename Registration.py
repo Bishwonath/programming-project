@@ -25,38 +25,7 @@ def signin():
 ##############--------------------------
 # NEEDS TO BE MODIFIED ALOT OR DELETED:
 # Signin function:
-def signup():
-    first_name=fname.get()
-    last_name=lname.get()
-    email=email.get()
-    username=user.get()
-    password=code.get()
-    confirm_password=confirm_code.get()
 
-    if password==confirm_password:
-        try:
-            file=open('datasheet.txt','r+')
-            d=file.read()
-            r=sql.literal_eval(d)
-
-            dict2={username:password}
-            r.update(dict2)
-            file.truncate(0)
-            file.close()
-
-            file=open('datasheet.txt','w')
-            w=file.write(str(r))
-
-            messagebox.showinfo('Sign Up','Successfully sign up')
-
-        except:
-            file=open('datasheet.txt','w')
-            pp=str({'Username':'password'})
-            file.write(pp)
-            file.close()
-
-    else:
-        messagebox.showerror('Invalid',"Both Password should match")
 
 
 ##############--------------------------
@@ -141,18 +110,18 @@ Frame(frame, width=310, height=2, bg='black').place(x=25, y=149)
 ##############--------------------------
 # Email input:
 def on_enter(e):
-    email.delete(0, 'end')
+    email_entry.delete(0, 'end')
 
 def on_leave(e):
-    name=email.get()
+    name=email_entry.get()
     if name=='':
-        email.insert(0, 'Email address')
+        email_entry.insert(0, 'email address')
 
-email=Entry(frame, width=25, fg='black', border=0, bg="white", font=('Officina',11))
-email.place(x=30, y=166)
-email.insert(0, 'Email address')
-email.bind('<FocusIn>', on_enter)
-email.bind('<FocusOut>', on_leave)
+email_entry=Entry(frame, width=25, fg='black', border=0, bg="white", font=('Officina',11))
+email_entry.place(x=30, y=166)
+email_entry.insert(0, 'email address')
+email_entry.bind('<FocusIn>', on_enter)
+email_entry.bind('<FocusOut>', on_leave)
 
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=191)
 
@@ -210,7 +179,62 @@ show2=IntVar(value=1)
 Checkbutton(text='Show', offvalue=0, variable=show2, bg='white', command=showw).place(x=335, y=265)
 Frame(frame, width=310, height=2, bg='black').place(x=25, y=275)
 
+def signup():
+    first_name=fname.get()
+    last_name=lname.get()
+    email=email_entry.get()
+    username=user.get()
+    password=code.get()
+    confirm_password=confirm_code.get()
+    conn=sql.connect("registration.db")
+    c=conn.cursor()
+    c.execute("""CREATE TABLE IF NOT EXISTS register(
+    first_name text,
+    last_name text,
+    email text,
+    username text,
+    password text
+    
+    
+    )""")
 
+    conn=sql.connect("registration.db")
+    c=conn.cursor()
+    c.execute("INSERT INTO register VALUES(:first_name,:last_name,:email,:username,:password)",{
+        "first_name":fname.get(),
+        "last_name":lname.get(),
+        "email":email_entry.get(),
+        "username":user.get(),
+        "password":code.get()
+        })
+    conn.commit()
+    conn.close()
+
+
+    # if password==confirm_password:
+    #     try:
+    #         file=open('datasheet.txt','r+')
+    #         d=file.read()
+    #         r=sql.literal_eval(d)
+
+    #         dict2={username:password}
+    #         r.update(dict2)
+    #         file.truncate(0)
+    #         file.close()
+
+    #         file=open('datasheet.txt','w')
+    #         w=file.write(str(r))
+
+    #         messagebox.showinfo('Sign Up','Successfully sign up')
+
+    #     except:
+    #         file=open('datasheet.txt','w')
+    #         pp=str({'Username':'password'})
+    #         file.write(pp)
+    #         file.close()
+
+    # else:
+    #     messagebox.showerror('Invalid',"Both Password should match")
 ##############--------------------------
 # Register/Sign up button:
 Button(frame, width=39, pady=7, text='Register', bg='#917991', fg='white', border=0, command=signup).place(x=35, y=305)
