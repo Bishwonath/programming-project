@@ -161,7 +161,7 @@ Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0
 label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
 label.place(x=100, y=270)
 
-# Forgot password button:
+# Forgot password text:
 forgot_password=Button(frame, width=15, text='Forgot password?', font=('Officina', 8, 'underline'), border=0, bg='white', cursor='hand2', fg='#917991')
 forgot_password.place(x=30, y=190)
 
