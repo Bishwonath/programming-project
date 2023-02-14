@@ -29,7 +29,9 @@ lbl.pack()
 
 ############----------------------
 # to open another window(registration):
+# login function:
 def login():
+
     def sign_up():
         root.destroy()
         import Registration
@@ -138,6 +140,9 @@ def login():
 
     Checkbutton(text='Show password', offvalue=0, variable=showw, bg='white', command=show).place(x=600, y=230)    
 
+# #login button
+#     Button(root,text="LOGIN",font=('Arial',10,'bold'),fg='white',bg="#338bd7",width=16,height=2,cursor='hand2',command=login).place(x=878, y=350)
+
 
 ###########----------------------
 # verification check(signin):
@@ -154,15 +159,16 @@ def login():
 
 ############---------------------
 # Login button:
-    Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=login).place(x=35, y=230)
+    Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
     label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
     label.place(x=100, y=270)
 
+# data input function with 'enter key'
+    root.bind('<Return>',lambda event:signin())
 
 # Sign_up button:
     sign_up=Button(frame, width=6, text='Sign Up', border=0, bg='white', command=sign_up , cursor='hand2', fg='#917991')
     sign_up.place(x=220, y=270)
-    root.bind('<Return>',lambda event:signin())
 
 # Forgot password text:
     forgot_password=Button(frame, width=15, text='Forgot password?', font=('Officina', 8, 'underline'), border=0, bg='white', cursor='hand2', command=pwd, fg='#917991')
@@ -310,14 +316,14 @@ def pwd():
         z=c_pwd.get()
 
         if w=="" or w=="Enter Your Email" or x=="" or y=="" or y=="New Password" or z=="" or z=="Confirm New Password":
-            messagebox.showerror("Password Reset","One or More Fields Empty")
+            messagebox.showerror("Error","One or More Fields Empty")
         else:
             if "@" and ".com" not in w:
-                messagebox.showerror("Password Reset","Invalid Email")
+                messagebox.showerror("Error","Invalid Email")
             elif len(y)<6 or len(z)<6:
-                messagebox.showerror("Password Reset","Password must be more than 6 characters")
+                messagebox.showerror("Error","Password must be more than 6 characters")
             elif y!=z:
-                messagebox.showerror("Password Reset","Passwords Mismatch")
+                messagebox.showerror("Error","Passwords Mismatch")
             else:
                 update()
 
