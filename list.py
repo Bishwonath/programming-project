@@ -90,11 +90,11 @@ if __name__ == "__main__":
       
     guiWindow = tk.Tk()  
     
-    guiWindow.title("To-Do List Manager")  
+    guiWindow.title("To-Do List")  
       
-    guiWindow.geometry("800x600+200+200")  
+    guiWindow.geometry("800x600+300+100")  
       
-    guiWindow.resizable(0, 0)  
+    guiWindow.resizable(False, False)  
       
     guiWindow.configure(bg = "#917991")  
   
@@ -122,9 +122,9 @@ if __name__ == "__main__":
     header_label = ttk.Label(  
         header_frame,  
         text = "The To-Do List",  
-        font = ("officina", "35"),  
-        background = "#917991",  
-        foreground = "#000000" ,
+        font = ("Officina", "35", "bold"),  
+        background = "white",  
+        foreground = "#917991" ,
     )  
      
     header_label.pack(padx = 20, pady = 20)  
