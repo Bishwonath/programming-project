@@ -140,9 +140,6 @@ def login():
 
     Checkbutton(text='Show password', offvalue=0, variable=showw, bg='white', command=show).place(x=600, y=230)    
 
-# #login button
-#     Button(root,text="LOGIN",font=('Arial',10,'bold'),fg='white',bg="#338bd7",width=16,height=2,cursor='hand2',command=login).place(x=878, y=350)
-
 
 ###########----------------------
 # verification check(signin):
@@ -152,10 +149,11 @@ def login():
 
         if (username=="" or username=="Enter Your Username") or (password=="" or password=="Enter Your Password"):
             messagebox.showerror("Error","One or More Fields Empty.")
-        elif len(password)<8:
-            messagebox.showerror("Error", "Password must be 8 characters")
+        elif len(password)<6:
+            messagebox.showerror("Error", "Password must be more than 6 characters")
         else:
             check()
+
 
 ############---------------------
 # Login button:
@@ -166,13 +164,18 @@ def login():
 # data input function with 'enter key'
     root.bind('<Return>',lambda event:signin())
 
+
+############-----------------------
 # Sign_up button:
     sign_up=Button(frame, width=6, text='Sign Up', border=0, bg='white', command=sign_up , cursor='hand2', fg='#917991')
     sign_up.place(x=220, y=270)
 
+
+############-----------------------
 # Forgot password text:
     forgot_password=Button(frame, width=15, text='Forgot password?', font=('Officina', 8, 'underline'), border=0, bg='white', cursor='hand2', command=pwd, fg='#917991')
     forgot_password.place(x=30, y=190)
+
 
 # Forgot password function:
 def pwd():
@@ -187,6 +190,7 @@ def pwd():
     label=Label(win, text='Reset Password', bg='white',fg='#917991' , font=('Officina', 23, 'bold')).place(x=60, y=10)
 
 
+############-----------------------
 # User input:
     # remove functionalities(placeholders)
     def on_enter(e):
@@ -204,8 +208,11 @@ def pwd():
     mail.bind('<FocusIn>', on_enter)
     mail.bind('<FocusOut>', on_leave)
 
+
+############-----------------------
 # Security questions:
     ans=StringVar()
+
     a="Q1: What is your favourite food?"
     b="Q2: What is the name of your first pet?"
     c="Q3: What is the name of your childhood best friend?"
@@ -271,7 +278,9 @@ def pwd():
 
     Button(win,text="Confirm",font=('Officina',10,'bold'),fg='white',bg='#917991',width=18,height=1,cursor='hand2',command=lambda:verify()).place(x=110, y=300)
 
-    # update function for new password
+
+############-----------------------
+# update function for new password
     def update():
         a=mail.get()
         b=ans.get()
@@ -292,12 +301,12 @@ def pwd():
                 pw_upd=new_pwd.get()
                 cpw_upd=c_pwd.get()
                 c.execute("""UPDATE users SET
-                ps= :new_pwd,
-                psc= :c_pwd
+                pwd= :new_pwd,
+                cpwd= :c_pwd
                 WHERE mail = :a""",
                 {
-                    'new_ps':pw_upd,
-                    'new_psc':cpw_upd,
+                    'new_pwd':pw_upd,
+                    'new_cpwd':cpw_upd,
                     'a':a
                 })
                 messagebox.showinfo("Password Reset","Password Changed Successfully")
@@ -308,6 +317,7 @@ def pwd():
         conn.close()
 
 
+############-----------------------
 # Password verification for forgot functionality:
     def verify():
         w=mail.get()
@@ -330,5 +340,3 @@ def pwd():
 login()
 
 root.mainloop()
-
-
