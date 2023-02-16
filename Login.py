@@ -53,7 +53,7 @@ def login():
             a=user.get()
             b=code.get()
             try:
-                conn=sql.connect('admins.db')
+                conn=sql.connect('admin.db')
                 c=conn.cursor()
                 
                 c.execute("SELECT * from users")
@@ -276,7 +276,7 @@ def pwd():
     Checkbutton(win,text='Show',offvalue=0,variable=showww,bg='white',command=show2).place(x=300,y=233)
 
 
-    Button(win,text="Confirm",font=('Officina',10,'bold'),fg='white',bg='#917991',width=18,height=1,cursor='hand2',command=lambda:verify()).place(x=110, y=300)
+    Button(win,text="Confirm",font=('Officina',10,'bold'),fg='white',bg='#917991',width=18,height=1,cursor='hand2',command= verify()).place(x=110, y=300)
 
 
 ############-----------------------
@@ -286,7 +286,7 @@ def pwd():
         b=ans.get()
         
         #database connection for password update
-        conn=sql.connect('admins.db')
+        conn=sql.connect('admin.db')
         c=conn.cursor()
         c.execute("SELECT * from users")
         records=c.fetchall()
@@ -301,8 +301,8 @@ def pwd():
                 pw_upd=new_pwd.get()
                 cpw_upd=c_pwd.get()
                 c.execute("""UPDATE users SET
-                pwd= :new_pwd,
-                cpwd= :c_pwd
+                new_pwd= :new_pwd,
+                new_cpwd= :c_pwd
                 WHERE mail = :a""",
                 {
                     'new_pwd':pw_upd,

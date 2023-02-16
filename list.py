@@ -101,7 +101,7 @@ def logout():
     msb=messagebox.askquestion("Logout","Are you sure you want to logout?")
     if msb=='yes':
 #set user status to inactive
-        conn=sql.connect('admins.db')
+        conn=sql.connect('admin.db')
         c=conn.cursor()
         c.execute("""UPDATE users SET
         status= :off
