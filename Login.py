@@ -7,8 +7,12 @@ import sqlite3 as sql
 import random
 
 
+
 # creating a window:
 root=Tk()
+def todlist():
+    root.destroy()
+    import todolist
 
 # window title:
 root.title('Login')
@@ -49,50 +53,50 @@ def login():
 
 ###########------------------------
 # authorization check:
-    def check():
-            a=user.get()
-            b=code.get()
-            try:
-                conn=sql.connect('admin.db')
-                c=conn.cursor()
+    # def check():
+    #         a=user.get()
+    #         b=code.get()
+    #         try:
+    #             conn=sql.connect('admin.db')
+    #             c=conn.cursor()
                 
-                c.execute("SELECT * from users")
-                records=c.fetchall()
-                i=len(records)-1
-                while i>=0:
-                    if records[i][2]!=a or records[i][4]!=b:
-                        i=i-1
-                        if i==-1:
-                            messagebox.showerror("Login","Invalid credentials")
-                            break
-                    else:
-                        # to change user status to active after login and set other users as inactive
-                        c.execute("""UPDATE users SET
-                        status=:inactive
-                        WHERE status=:active""",
-                        {'inactive':False,
-                        'active':True})
-                        conn.commit()
+    #             c.execute("SELECT * from users")
+    #             records=c.fetchall()
+    #             i=len(records)-1
+    #             while i>=0:
+    #                 if records[i][2]!=a or records[i][4]!=b:
+    #                     i=i-1
+    #                     if i==-1:
+    #                         messagebox.showerror("Login","Invalid credentials")
+    #                         break
+    #                 else:
+    #                     # to change user status to active after login and set other users as inactive
+    #                     c.execute("""UPDATE users SET
+    #                     status=:inactive
+    #                     WHERE status=:active""",
+    #                     {'inactive':False,
+    #                     'active':True})
+    #                     conn.commit()
                         
-                        c.execute("""UPDATE users SET
-                        status= :val
-                        WHERE user = :a""",
-                        {
-                            'val':True,
-                            'a':a
-                        })
-                        conn.commit()
-                        messagebox.showinfo("Login","Logged in Successfully")
-                        # openstatus()
-                        #Login connection
+    #                     c.execute("""UPDATE users SET
+    #                     status= :val
+    #                     WHERE user = :a""",
+    #                     {
+    #                         'val':True,
+    #                         'a':a
+    #                     })
+    #                     conn.commit()
+    #                     messagebox.showinfo("Login","Logged in Successfully")
+    #                     # openstatus()
+    #                     #Login connection
 
-                        # def lis():
-                        #     import list
-                        break
-                conn.commit()
-                conn.close()
-            except:
-                messagebox.showerror("Invalid","Sign Up First")
+    #                     # def lis():
+    #                     #     import list
+    #                     break
+    #             conn.commit()
+    #             conn.close()
+    #         except:
+    #             messagebox.showerror("Invalid","Sign Up First")
             
 
 ############-----------------------
@@ -148,15 +152,35 @@ def login():
 ###########----------------------
 # verification check(signin):
     def signin():
-        username=user.get()
-        password=code.get()
+        if user.get()=='' or code.get()=='':
+            messagebox.showinfo("error","one or more fields are empty")
+        
+        else:            
+            conn = sql.connect("admin.db")
+            c = conn.cursor()
 
-        if (username=="" or username=="Enter Your Username") or (password=="" or password=="Enter Your Password"):
-            messagebox.showerror("Error","One or More Fields Empty.")
-        elif len(password)<6:
-            messagebox.showerror("Error", "Password must be more than 6 characters")
-        else:
-            check()
+            u = 'SELECT * FROM users WHERE mail = ? and pwd = ?'
+            c.execute(u,[(user.get()),(code.get())])
+            un=user.get()
+            result = c.fetchall()
+            if result:
+                messagebox.showinfo("Success", 'Logged in Successfully.')
+                conn.commit()
+                c.execute("""UPDATE users SET
+                            status= :condition
+                            WHERE mail = :un""",
+                            {
+                                'condition':True,
+                                'un':un
+                            })
+                conn.commit()
+                todlist()
+        # if (username=="" or username=="Enter Your Username") or (password=="" or password=="Enter Your Password"):
+        #     messagebox.showerror("Error","One or More Fields Empty.")
+        # elif len(password)<6:
+        #     messagebox.showerror("Error", "Password must be more than 6 characters")
+        # else:
+        #     check()
 
 
 ############---------------------
@@ -172,8 +196,8 @@ def login():
 
 ############-----------------------
 # Sign_up button:
-    sign_up=Button(frame, width=6, text='Sign Up', border=0, bg='white', command=sign_up , cursor='hand2', fg='#917991')
-    sign_up.place(x=220, y=270)
+    signup=Button(frame, width=6, text='Sign Up', border=0, bg='white', command=sign_up , cursor='hand2', fg='#917991')
+    signup.place(x=220, y=270)
 
 
 ############-----------------------
