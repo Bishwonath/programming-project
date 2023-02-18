@@ -124,7 +124,7 @@ def logout():
 
 ################---------------------
 # main function  
-# if __name__ == "__main__":  
+  
 connection = sql.connect('listOfTasks.db')    
 cursor = connection.cursor()  
 cursor.execute('create table if not exists tasks (title text)')  
@@ -144,6 +144,7 @@ functions_frame.pack(side = "bottom", expand = True, fill = "both")
 listbox_frame.pack(side = "top", expand = True, fill = "both") 
 taskinput_frame.pack(expand = True, fill = "both") 
       
+
 # creating title:
 header_label = Label(  
         header_frame,  
@@ -167,6 +168,7 @@ task_label = Label(
 # position:
 task_label.place(x = 160, y = 22)  
       
+
 # entry gap:
 task_field = Entry(  
         taskinput_frame,  
@@ -177,6 +179,7 @@ task_field = Entry(
     )  
 task_field.place(x = 290, y = 25)  
   
+
 # Add button:
 add_button = Button(  
         taskinput_frame,  
@@ -188,6 +191,7 @@ add_button = Button(
         font=("Officina", 12),
         command = add_task  
     )  
+
 
 # Prioritize button:
 sort_button = Button(
@@ -201,6 +205,7 @@ sort_button = Button(
         command= sort_listbox,
     )
     
+
 # Delete button:
 del_button = Button(  
         functions_frame,  
@@ -212,6 +217,7 @@ del_button = Button(
         font=("Officina", 12),
         command = delete_task  
     )  
+
 
 # Delete all button:
 del_all_button = Button(  
@@ -225,6 +231,7 @@ del_all_button = Button(
         command = delete_all_tasks  
     )  
 
+
 # Exit button:
 exit_button = Button(  
         functions_frame,  
@@ -236,6 +243,7 @@ exit_button = Button(
         font=("Officina", 12), 
         command = close  
     ) 
+
 
 # Logout button:
 logout_button = Button(
@@ -275,11 +283,13 @@ task_listbox = Listbox(
 
 task_listbox.place(x = 40, y = 10)  
      
+
 retrieve_database()  
-list_update() 
+
+list_update()
+
 root.mainloop()   
       
-     
-   
+      
 connection.commit()  
 cursor.close() 

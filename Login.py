@@ -7,7 +7,6 @@ import sqlite3 as sql
 import random
 
 
-
 # creating a window:
 root=Tk()
 
@@ -27,6 +26,7 @@ resize_image=image.resize((310,330))
 imagess=ImageTk.PhotoImage(resize_image)
 lbl=Label(frame1, image=imagess, width=300, height=300)
 lbl.pack()
+
 
 ############----------------------
 # to open another window(registration):

@@ -14,6 +14,7 @@ root.geometry('800x450+300+200')
 root.configure(bg="white")
 root.resizable(False, False)
 
+git
 ##############--------------------------
 # Image frame:
 frame1=Frame(root,width=350, height=300)
