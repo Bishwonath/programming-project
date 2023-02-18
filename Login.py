@@ -48,54 +48,6 @@ def login():
     heading.place(x=130, y=1)
 
 
-###########------------------------
-# authorization check:
-    # def check():
-    #         a=user.get()
-    #         b=code.get()
-    #         try:
-    #             conn=sql.connect('admin.db')
-    #             c=conn.cursor()
-                
-    #             c.execute("SELECT * from users")
-    #             records=c.fetchall()
-    #             i=len(records)-1
-    #             while i>=0:
-    #                 if records[i][2]!=a or records[i][4]!=b:
-    #                     i=i-1
-    #                     if i==-1:
-    #                         messagebox.showerror("Login","Invalid credentials")
-    #                         break
-    #                 else:
-    #                     # to change user status to active after login and set other users as inactive
-    #                     c.execute("""UPDATE users SET
-    #                     status=:inactive
-    #                     WHERE status=:active""",
-    #                     {'inactive':False,
-    #                     'active':True})
-    #                     conn.commit()
-                        
-    #                     c.execute("""UPDATE users SET
-    #                     status= :val
-    #                     WHERE user = :a""",
-    #                     {
-    #                         'val':True,
-    #                         'a':a
-    #                     })
-    #                     conn.commit()
-    #                     messagebox.showinfo("Login","Logged in Successfully")
-    #                     # openstatus()
-    #                     #Login connection
-
-    #                     # def lis():
-    #                     #     import list
-    #                     break
-    #             conn.commit()
-    #             conn.close()
-    #         except:
-    #             messagebox.showerror("Invalid","Sign Up First")
-            
-
 ############-----------------------
 # username input:
     def on_enter(e):
