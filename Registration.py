@@ -10,11 +10,12 @@ root=Tk()
 
 # window title:
 root.title('Sign Up')
+# (widthxheight)
 root.geometry('800x450+300+200')
 root.configure(bg="white")
 root.resizable(False, False)
 
-git
+
 ##############--------------------------
 # Image frame:
 frame1=Frame(root,width=350, height=300)
@@ -70,7 +71,9 @@ def signup():
 
 ##############--------------------------
 # First name input:
-# This function acts as placeholders so that when users click on the netry box, inserted text is deleted.
+# This function acts as placeholders so that when users click on the etry box,
+#  inserted text is deleted.
+
     def on_enter(e):
         fname.delete(0, 'end')
 
@@ -102,7 +105,7 @@ def signup():
     lname=Entry(frame, width=25, fg='black', border=0, bg='white', font=('Officina',11))
     lname.place(x=190, y=82)
     lname.insert(0,'Last Name')
-    # bind function:
+    # bind function: 
     lname.bind('<FocusIn>', on_enter)
     lname.bind('<FocusOut>', on_leave)
 
