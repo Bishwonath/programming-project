@@ -16,9 +16,9 @@ root.resizable(False, False)
 
 ##############--------------------------
 # Image frame:
-frame1=Frame(root,width=350, height=300, bg="blue")
+frame1=Frame(root,width=350, height=300)
 frame1.place(x=400, y=10)
-image=(Image.open("Log.png"))
+image=(Image.open("reg.jpg"))
 resize_image=image.resize((400,350))
 imagess=ImageTk.PhotoImage(resize_image)
 lbl=Label(frame1, image=imagess, width=400, height=400)
@@ -63,7 +63,7 @@ def signup():
     frame.place(x=50, y=10)
 
 # Registration text:
-    heading=Label(frame, text='Registration', fg="#917991", font=('Officina',23,'bold'))
+    heading=Label(frame, text='Registration', fg="#917991", font=('Officina',23,'bold'), bg='white')
     heading.place(x=130, y=1)
 
 

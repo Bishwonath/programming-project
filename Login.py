@@ -20,7 +20,7 @@ root.resizable(False, False)
 
 ############----------------------
 # image frame:
-frame1=Frame(root,width=350, height=300, bg="blue")
+frame1=Frame(root,width=350, height=300)
 frame1.place(x=60, y=40)
 image=(Image.open("Log.png"))
 resize_image=image.resize((310,330))

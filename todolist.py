@@ -10,7 +10,7 @@ root=Tk()
 
 # window title:
 root.title("To-Do List")  
-root.geometry("800x600") 
+root.geometry("800x650+300+100") 
 # root.configure(bg = "white")   
 root.resizable(False, False)  
   
