@@ -10,9 +10,6 @@ import random
 
 # creating a window:
 root=Tk()
-def todlist():
-    root.destroy()
-    import todolist
 
 # window title:
 root.title('Login')
@@ -152,6 +149,14 @@ def login():
 ###########----------------------
 # verification check(signin):
     def signin():
+    
+
+        def todlist():
+            root.destroy()
+            import todolist 
+               
+           
+
         if user.get()=='' or code.get()=='':
             messagebox.showinfo("error","one or more fields are empty")
         
@@ -173,8 +178,14 @@ def login():
                                 'condition':True,
                                 'un':un
                             })
+                
                 conn.commit()
+                conn.close()
                 todlist()
+                
+            else:
+                messagebox.showinfo("error","Invalid credentials")
+                
         # if (username=="" or username=="Enter Your Username") or (password=="" or password=="Enter Your Password"):
         #     messagebox.showerror("Error","One or More Fields Empty.")
         # elif len(password)<6:
@@ -185,6 +196,10 @@ def login():
 
 ############---------------------
 # Login button:
+    # Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
+    # label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
+    # label.place(x=100, y=270)
+
     Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
     label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
     label.place(x=100, y=270)

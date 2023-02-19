@@ -4,13 +4,14 @@ from tkinter import *
 from tkinter import messagebox
 import sqlite3 as sql
 
+
 # creating a window:
 root=Tk()
 
 # window title:
 root.title("To-Do List")  
-root.geometry("800x600+300+100") 
-root.configure(bg = "white")   
+root.geometry("800x600") 
+# root.configure(bg = "white")   
 root.resizable(False, False)  
   
 
@@ -22,7 +23,7 @@ def add_task():
         messagebox.showinfo('Error', 'Field is Empty.')  
     else:  
         tasks.append(task_string)  
-        the_cursor.execute('insert into tasks values (?)', (task_string ,))  
+        cursor.execute('insert into tasks values (?)', (task_string ,))  
         list_update()  
         task_field.delete(0, 'end')  
 
@@ -59,7 +60,7 @@ def delete_task():
         if the_value in tasks:  
             tasks.remove(the_value)  
             list_update()  
-            the_cursor.execute('delete from tasks where title = ?', (the_value,))  
+            cursor.execute('delete from tasks where title = ?', (the_value,))  
     except:  
         messagebox.showinfo('Error', 'No Task Selected. Cannot Delete.')        
 
@@ -71,7 +72,7 @@ def delete_all_tasks():
     if message_box == True:  
         while(len(tasks) != 0):  
             tasks.pop()  
-        the_cursor.execute('delete from tasks')  
+        cursor.execute('delete from tasks')  
         list_update()  
   
   
@@ -91,7 +92,7 @@ def close():
 def retrieve_database():  
     while(len(tasks) != 0):  
         tasks.pop()  
-    for row in the_cursor.execute('select title from tasks'):  
+    for row in cursor.execute('select title from tasks'):  
         tasks.append(row[0])  
   
 
@@ -123,28 +124,28 @@ def logout():
 
 ################---------------------
 # main function  
-if __name__ == "__main__":  
-    the_connection = sql.connect('listOfTasks.db')    
-    the_cursor = the_connection.cursor()  
-    the_cursor.execute('create table if not exists tasks (title text)')  
+# if __name__ == "__main__":  
+connection = sql.connect('listOfTasks.db')    
+cursor = connection.cursor()  
+cursor.execute('create table if not exists tasks (title text)')  
      
-    tasks = []  
+tasks = []  
       
 ################---------------------
 # creating frame:
-    header_frame = Frame(root, bg = "white")  
-    functions_frame = Frame(root, bg = "white")  
-    listbox_frame = Frame(root, bg = "white")  
-    taskinput_frame = Frame(root, bg = "white")
+header_frame = Frame(root, bg = "white")  
+functions_frame = Frame(root, bg = "white")  
+listbox_frame = Frame(root, bg = "white")  
+taskinput_frame = Frame(root, bg = "white")
   
     
-    header_frame.pack(fill = "both")  
-    functions_frame.pack(side = "bottom", expand = True, fill = "both")  
-    listbox_frame.pack(side = "top", expand = True, fill = "both") 
-    taskinput_frame.pack(expand = True, fill = "both") 
+header_frame.pack(fill = "both")  
+functions_frame.pack(side = "bottom", expand = True, fill = "both")  
+listbox_frame.pack(side = "top", expand = True, fill = "both") 
+taskinput_frame.pack(expand = True, fill = "both") 
       
 # creating title:
-    header_label = Label(  
+header_label = Label(  
         header_frame,  
         text = "The To-Do List",  
         font = ("Officina", "35", "bold"),  
@@ -152,32 +153,32 @@ if __name__ == "__main__":
         foreground = "#917991" ,
     )  
      
-    header_label.pack(padx = 50, pady = 5)  
+header_label.pack(padx = 50, pady = 5)  
   
 
 # Enter task text:
-    task_label = Label(  
-        taskinput_frame,
+task_label = Label(  
+     taskinput_frame,
         text = "Enter the task:",  
         font = ("Officina", 14),  
         background = "white",  
         foreground = "#917991"  
     )  
 # position:
-    task_label.place(x = 160, y = 22)  
+task_label.place(x = 160, y = 22)  
       
 # entry gap:
-    task_field = Entry(  
+task_field = Entry(  
         taskinput_frame,  
         font = ("Officina", "14"),  
         width = 30,  
         background = "white",  
         foreground = "black"  
     )  
-    task_field.place(x = 290, y = 25)  
+task_field.place(x = 290, y = 25)  
   
 # Add button:
-    add_button = Button(  
+add_button = Button(  
         taskinput_frame,  
         text = "Add Task",  
         width = 25,
@@ -189,7 +190,7 @@ if __name__ == "__main__":
     )  
 
 # Prioritize button:
-    sort_button = Button(
+sort_button = Button(
         taskinput_frame,
         text= "Prioritize",
         width = 25, 
@@ -201,7 +202,7 @@ if __name__ == "__main__":
     )
     
 # Delete button:
-    del_button = Button(  
+del_button = Button(  
         functions_frame,  
         text = "Delete Task",  
         width = 25, 
@@ -213,7 +214,7 @@ if __name__ == "__main__":
     )  
 
 # Delete all button:
-    del_all_button = Button(  
+del_all_button = Button(  
         functions_frame,  
         text = "Delete All Tasks",  
         width = 25,  
@@ -225,7 +226,7 @@ if __name__ == "__main__":
     )  
 
 # Exit button:
-    exit_button = Button(  
+exit_button = Button(  
         functions_frame,  
         text = "Exit",  
         width = 25, 
@@ -237,7 +238,7 @@ if __name__ == "__main__":
     ) 
 
 # Logout button:
-    logout_button = Button(
+logout_button = Button(
     functions_frame,  
         text = "Logout",  
         width = 25, 
@@ -250,17 +251,17 @@ if __name__ == "__main__":
 
       
 # Positioning the above buttons:
-    add_button.place(x = 140, y = 100) 
-    sort_button.place(x = 410, y = 100)
-    del_button.place(x = 140, y = 10)  
-    del_all_button.place(x = 410, y = 10)  
-    exit_button.place(x = 410, y = 100)  
-    logout_button.place(x = 140, y = 100)
+add_button.place(x = 140, y = 100) 
+sort_button.place(x = 410, y = 100)
+del_button.place(x = 140, y = 10)  
+del_all_button.place(x = 410, y = 10)  
+exit_button.place(x = 410, y = 100)  
+logout_button.place(x = 140, y = 100)
 
     
 ################---------------------
 # list box:
-    task_listbox = Listbox(  
+task_listbox = Listbox(  
         listbox_frame,  
         width = 55,  
         height = 5, 
@@ -272,12 +273,13 @@ if __name__ == "__main__":
         selectforeground = "#FFFFFF"  
     )
 
-    task_listbox.place(x = 40, y = 10)  
+task_listbox.place(x = 40, y = 10)  
      
-    retrieve_database()  
-    list_update()  
+retrieve_database()  
+list_update()  
       
-    root.mainloop()  
+     
    
-    the_connection.commit()  
-    the_cursor.close()  
+connection.commit()  
+cursor.close() 
+root.mainloop()  
