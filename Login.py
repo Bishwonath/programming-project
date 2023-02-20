@@ -7,6 +7,7 @@ import sqlite3 as sql
 import random
 
 
+
 # creating a window:
 root=Tk()
 
@@ -19,14 +20,13 @@ root.resizable(False, False)
 
 ############----------------------
 # image frame:
-frame1=Frame(root,width=350, height=300)
+frame1=Frame(root,width=350, height=300, bg="blue")
 frame1.place(x=60, y=40)
 image=(Image.open("Log.png"))
 resize_image=image.resize((310,330))
 imagess=ImageTk.PhotoImage(resize_image)
 lbl=Label(frame1, image=imagess, width=300, height=300)
 lbl.pack()
-
 
 ############----------------------
 # to open another window(registration):
@@ -48,6 +48,54 @@ def login():
     heading.place(x=130, y=1)
 
 
+###########------------------------
+# authorization check:
+    # def check():
+    #         a=user.get()
+    #         b=code.get()
+    #         try:
+    #             conn=sql.connect('admin.db')
+    #             c=conn.cursor()
+                
+    #             c.execute("SELECT * from users")
+    #             records=c.fetchall()
+    #             i=len(records)-1
+    #             while i>=0:
+    #                 if records[i][2]!=a or records[i][4]!=b:
+    #                     i=i-1
+    #                     if i==-1:
+    #                         messagebox.showerror("Login","Invalid credentials")
+    #                         break
+    #                 else:
+    #                     # to change user status to active after login and set other users as inactive
+    #                     c.execute("""UPDATE users SET
+    #                     status=:inactive
+    #                     WHERE status=:active""",
+    #                     {'inactive':False,
+    #                     'active':True})
+    #                     conn.commit()
+                        
+    #                     c.execute("""UPDATE users SET
+    #                     status= :val
+    #                     WHERE user = :a""",
+    #                     {
+    #                         'val':True,
+    #                         'a':a
+    #                     })
+    #                     conn.commit()
+    #                     messagebox.showinfo("Login","Logged in Successfully")
+    #                     # openstatus()
+    #                     #Login connection
+
+    #                     # def lis():
+    #                     #     import list
+    #                     break
+    #             conn.commit()
+    #             conn.close()
+    #         except:
+    #             messagebox.showerror("Invalid","Sign Up First")
+            
+
 ############-----------------------
 # username input:
     def on_enter(e):
@@ -57,7 +105,7 @@ def login():
         name=user.get()
         if name=='':
             user.insert(0, 'Username')
-
+    global user
     user=Entry(frame, width=25, fg='black', border=0, bg='white', font=('Officina',11))
     user.place(x=30, y=80)
     user.insert(0,'Username')
@@ -138,10 +186,20 @@ def login():
             else:
                 messagebox.showinfo("error","Invalid credentials")
                 
-        
+        # if (username=="" or username=="Enter Your Username") or (password=="" or password=="Enter Your Password"):
+        #     messagebox.showerror("Error","One or More Fields Empty.")
+        # elif len(password)<6:
+        #     messagebox.showerror("Error", "Password must be more than 6 characters")
+        # else:
+        #     check()
+
 
 ############---------------------
 # Login button:
+    # Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
+    # label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
+    # label.place(x=100, y=270)
+
     Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
     label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
     label.place(x=100, y=270)
@@ -262,7 +320,7 @@ def pwd():
     Checkbutton(win,text='Show',offvalue=0,variable=showww,bg='white',command=show2).place(x=300,y=233)
 
 
-    Button(win,text="Confirm",font=('Officina',10,'bold'),fg='white',bg='#917991',width=18,height=1,cursor='hand2',command= verify()).place(x=110, y=300)
+   
 
 
 ############-----------------------
@@ -287,21 +345,22 @@ def pwd():
                 pw_upd=new_pwd.get()
                 cpw_upd=c_pwd.get()
                 c.execute("""UPDATE users SET
-                new_pwd= :new_pwd,
-                new_cpwd= :c_pwd
-                WHERE mail = :a""",
+                pwd= :new_pwd,
+                cpwd= :c_pwd
+                WHERE username = :a""",
                 {
                     'new_pwd':pw_upd,
-                    'new_cpwd':cpw_upd,
+                    'c_pwd':cpw_upd,
                     'a':a
                 })
+                conn.commit()
+                conn.close()
+
                 messagebox.showinfo("Password Reset","Password Changed Successfully")
                 # to destroy previous password after successful new password update
                 win.destroy()
                 break             
-        conn.commit()
-        conn.close()
-
+       
 
 ############-----------------------
 # Password verification for forgot functionality:
@@ -322,6 +381,7 @@ def pwd():
                 messagebox.showerror("Error","Passwords Mismatch")
             else:
                 update()
+    Button(win,text="Confirm",font=('Officina',10,'bold'),fg='white',bg='#917991',width=18,height=1,cursor='hand2',command= verify).place(x=110, y=300)
 
 login()
 
