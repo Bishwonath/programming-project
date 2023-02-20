@@ -276,10 +276,10 @@ task_listbox = Listbox(
 task_listbox.place(x = 40, y = 10)  
      
 retrieve_database()  
-list_update()  
+list_update() 
+root.mainloop()   
       
      
    
 connection.commit()  
 cursor.close() 
-root.mainloop()  
