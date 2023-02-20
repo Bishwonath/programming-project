@@ -81,25 +81,10 @@ def clear_list():
   
 
 ################---------------------
-# exit function:
+# exit function:              
 def close():  
-    print(tasks)  
-    root.destroy()  
-  
-
-################---------------------
-# function:
-def retrieve_database():  
-    while(len(tasks) != 0):  
-        tasks.pop()  
-    for row in cursor.execute('select title from tasks'):  
-        tasks.append(row[0])  
-  
-
-################---------------------
-# logout function:
-def logout():
-    msb=messagebox.askquestion("Logout","Are you sure you want to logout?")
+    print(tasks)
+    msb=messagebox.askquestion("Logout","Are you sure you want to exit?")
     if msb=='yes':
 #set user status to inactive
         conn=sql.connect('admin.db')
@@ -120,6 +105,56 @@ def logout():
             import Login
         except:
             pass
+  
+
+################---------------------
+# function:
+def retrieve_database():  
+    while(len(tasks) != 0):  
+        tasks.pop()  
+    for row in cursor.execute('select title from tasks'):  
+        tasks.append(row[0])  
+  
+
+################---------------------
+# edit function:
+def editTask():
+        editor = Tk()
+        editor.title("Edit task")
+        editor.geometry("300x200+100+355")
+        editor.resizable(False,False)
+
+        new_task =Entry(editor,width=20,font=("Officina",14)).place(x=45, y=20)
+    
+
+    # PROBLEM!!!!!! # from delete function
+        # delt = task_listbox.get("active") 
+        # print(delt)
+
+        # if "'" in delt:
+        #     ourIndex = delt.index("'")
+        #     letters = list(delt)   
+        #     letters.insert(ourIndex,"\\")
+        #     delt = "".join(letters)
+
+        # def save():
+        #     newValue = new_task.get()
+        #     conn = sql.connect("listOfTasks.db")
+        #     print(newValue)
+        #     c = conn.cursor()
+
+        #     c.execute(
+                
+        #     )
+
+            conn.commit()
+            conn.close()
+            list_update()
+            editor.destroy()
+            
+        save_button = Button(editor, text="Save", bg="#917991", fg="white",width=12,height=1, command=save).place(x=110, y=60)
+
+        
 
 
 ################---------------------
@@ -245,16 +280,16 @@ exit_button = Button(
     ) 
 
 
-# Logout button:
-logout_button = Button(
-    functions_frame,  
-        text = "Logout",  
+# Edit button:
+edit_button = Button(
+        functions_frame,  
+        text = "Edit",  
         width = 25, 
         height = 2,
         bg="#917991",
         fg="white",
         font=("Officina", 12),
-        command = logout   
+        command = editTask   
     )
 
       
@@ -264,7 +299,7 @@ sort_button.place(x = 410, y = 100)
 del_button.place(x = 140, y = 10)  
 del_all_button.place(x = 410, y = 10)  
 exit_button.place(x = 410, y = 100)  
-logout_button.place(x = 140, y = 100)
+edit_button.place(x = 140, y = 100)
 
     
 ################---------------------
