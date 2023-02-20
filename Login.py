@@ -186,20 +186,10 @@ def login():
             else:
                 messagebox.showinfo("error","Invalid credentials")
                 
-        # if (username=="" or username=="Enter Your Username") or (password=="" or password=="Enter Your Password"):
-        #     messagebox.showerror("Error","One or More Fields Empty.")
-        # elif len(password)<6:
-        #     messagebox.showerror("Error", "Password must be more than 6 characters")
-        # else:
-        #     check()
-
+        
 
 ############---------------------
 # Login button:
-    # Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
-    # label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
-    # label.place(x=100, y=270)
-
     Button(frame, width=39, pady=7, text='Login', bg='#917991', fg='white', border=0, command=signin).place(x=35, y=230)
     label=Label(frame, text="Don't have an account?", fg='black', bg='white', font=('Officina',8))
     label.place(x=100, y=270)
