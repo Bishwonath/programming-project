@@ -123,36 +123,46 @@ def editTask():
         editor.title("Edit task")
         editor.geometry("300x200+100+355")
         editor.resizable(False,False)
+        global new_task
 
-        new_task =Entry(editor,width=20,font=("Officina",14)).place(x=45, y=20)
+        new_task =Entry(editor,width=20,font=("Officina",14))
+        new_task.place(x=45, y=20)
     
 
-    # PROBLEM!!!!!! # from delete function
-        # delt = task_listbox.get("active") 
-        # print(delt)
+    # from delete function
+        delt = task_listbox.get("active") 
+        print(delt)
 
-        # if "'" in delt:
-        #     ourIndex = delt.index("'")
-        #     letters = list(delt)   
-        #     letters.insert(ourIndex,"\\")
-        #     delt = "".join(letters)
+        if "'" in delt:
+            ourIndex = delt.index("'")
+            letters = list(delt)   
+            letters.insert(ourIndex,"\\")
+            delt = "".join(letters)
 
-        # def save():
-        #     newValue = new_task.get()
-        #     conn = sql.connect("listOfTasks.db")
-        #     print(newValue)
-        #     c = conn.cursor()
+        def save():
+            newValue = new_task.get()
+            conn = sql.connect("listOfTasks.db")
+            
+            print(newValue)
+            c = conn.cursor()
+            records=c.fetchone()
 
-        #     c.execute(
+            c.execute("""UPDATE tasks SET
+            title=:edit_ed
+             
+             """,
+            {"edit_ed":newValue}
                 
-        #     )
+            )
 
             conn.commit()
             conn.close()
             list_update()
             editor.destroy()
             
-        save_button = Button(editor, text="Save", bg="#917991", fg="white",width=12,height=1, command=save).place(x=110, y=60)
+        save_button = Button(editor, text="Save", bg="#917991", fg="white",width=12,height=1, command=save)
+        save_button.place(x=110, y=60)
+        
 
         
 
@@ -170,8 +180,10 @@ tasks = []
 # creating frame:
 header_frame = Frame(root, bg = "white")  
 functions_frame = Frame(root, bg = "white")  
-listbox_frame = Frame(root, bg = "white")  
+listbox_frame = Frame(root, bg = "white") 
+global taskinput_frame 
 taskinput_frame = Frame(root, bg = "white")
+
   
     
 header_frame.pack(fill = "both")  
@@ -271,13 +283,22 @@ del_all_button = Button(
 exit_button = Button(  
         functions_frame,  
         text = "Exit",  
-        width = 25, 
+        width = 11, 
         height = 2,
         bg="#917991",
         fg="white",
         font=("Officina", 12), 
         command = close  
     ) 
+    
+def refresh():
+    root.destroy()
+    import todolist
+    
+            
+    
+refresh_button = Button(functions_frame, text="Refresh",font=("Officina", 12), bg="#917991", fg="white",width=11,height=2, command=refresh)
+refresh_button.place(x=410, y=100)
 
 
 # Edit button:
@@ -298,7 +319,7 @@ add_button.place(x = 140, y = 100)
 sort_button.place(x = 410, y = 100)
 del_button.place(x = 140, y = 10)  
 del_all_button.place(x = 410, y = 10)  
-exit_button.place(x = 410, y = 100)  
+exit_button.place(x = 540, y = 100)  
 edit_button.place(x = 140, y = 100)
 
     
@@ -327,4 +348,4 @@ root.mainloop()
       
       
 connection.commit()  
-cursor.close() 
+cursor.close()
