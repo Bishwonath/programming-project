@@ -3,6 +3,7 @@
 from tkinter import *
 from tkinter import messagebox
 import sqlite3 as sql
+import tkinter as tk
 
 
 # creating a window:
@@ -11,7 +12,8 @@ root=Tk()
 # window title:
 root.title("To-Do List")  
 root.geometry("800x650+300+100") 
-# root.configure(bg = "white")   
+# root.configure(bg = "white")
+root.iconbitmap("window.ico")   
 root.resizable(False, False)  
   
 
@@ -30,19 +32,50 @@ def add_task():
 
 ################---------------------
 # Prioritize function:
-def sort_listbox():
-        selected_index = task_listbox.curselection()
-        if selected_index:
-            # selected_index = selected_index[0]
-            selected_item = task_listbox.get(selected_index)
-        items = list(task_listbox.get(0, END))
-        items.sort()
-        items.insert(0, selected_item)
-        task_listbox.delete(0, END)
-        for item in items:
-            task_listbox.insert(END, item)
-        # items.sort.mainloop()
+def sort_listbox(event=None):
+   
+    # Get the selected index(es)
+    selection = (task_listbox.get(i) for i in task_listbox.curselection())
+    
+    # Remove the selected item(s) from the Listbox
+    for i in task_listbox.curselection()[::-1]:
+        task_listbox.delete(i)
+    
+    # Insert the selected item(s) at the top of the Listbox
+    for item in selection:
+        task_listbox.insert(0, i)
+        conn = sql.connect("listofTasks.db")
+    c = conn.cursor()
+    for i, item in enumerate(task_listbox.get(0,tk.END)):
+        c.execute("UPDATE tasks SET title = ? WHERE title = ?", (i, item)) 
+    conn.commit()
+    conn.close()
 
+    
+
+
+        # selected_index = task_listbox.curselection()
+        # if selected_index:
+        #     # selected_index = selected_index[0]
+        #     selected_item = task_listbox.get(selected_index)
+        # items = list(task_listbox.get(0, END))
+        # items.sort()
+        # items.insert(0, selected_item)
+        # task_listbox.delete(0, END)
+        # for item in items:
+        #     task_listbox.insert(END, item)
+        #     conn = sql.connect("listofTasks.db")
+        # c = conn.cursor()
+        # c.execute("""UPDATE tasks SET
+        #     title=:sorted
+             
+        #      WHERE title=:task""",
+        #     {"sorted":selected_item,
+        #      "task":items}
+        #     )
+        # conn.commit()
+        # conn.close()
+       
 
 ################---------------------
 # update function:
@@ -146,12 +179,15 @@ def editTask():
             print(newValue)
             c = conn.cursor()
             records=c.fetchone()
+            newline=task_listbox.curselection()
+            tasksfield=task_listbox.get(newline)
 
             c.execute("""UPDATE tasks SET
             title=:edit_ed
              
-             """,
-            {"edit_ed":newValue}
+             WHERE title=:task""",
+            {"edit_ed":newValue,
+             "task":tasksfield}
                 
             )
 

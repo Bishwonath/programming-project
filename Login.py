@@ -11,10 +11,12 @@ import random
 # creating a window:
 root=Tk()
 
+
 # window title:
 root.title('Login')
 root.geometry('800x400+200+200')
 root.configure(bg="white")
+root.iconbitmap("window.ico")   
 root.resizable(False, False)
 
 

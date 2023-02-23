@@ -13,6 +13,7 @@ root.title('Sign Up')
 # (widthxheight)
 root.geometry('800x450+300+200')
 root.configure(bg="white")
+root.iconbitmap("window.ico")   
 root.resizable(False, False)
 
 
